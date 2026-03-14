@@ -1,88 +1,7 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
-// LINK DO APP
-const LINK_APP = 'https://seu-app-aqui.com';
-
-// PONTOS TURÍSTICOS
-const pontosTuristicos = {
-  1: {
-    nome: 'Marco Zero do Brasil',
-    descricao: 'Um dos pontos mais conhecidos da região, ideal para visitação e fotos.',
-    localizacao: 'https://maps.google.com/?q=Marco+Zero+Oiapoque'
-  },
-  2: {
-    nome: 'Ponte Binacional',
-    descricao: 'Importante ligação entre Brasil e Guiana Francesa.',
-    localizacao: 'https://maps.google.com/?q=Ponte+Binacional+Oiapoque'
-  },
-  3: {
-    nome: 'Orla de Oiapoque',
-    descricao: 'Espaço agradável para passeio e contemplação.',
-    localizacao: 'https://maps.google.com/?q=Orla+de+Oiapoque'
-  },
-  4: {
-    nome: 'Mercado Central',
-    descricao: 'Local para conhecer produtos regionais e o comércio local.',
-    localizacao: 'https://maps.google.com/?q=Mercado+Central+Oiapoque'
-  }
-};
-
-// PASSEIOS
-const passeios = {
-  1: {
-    nome: 'Passeio de Barco',
-    valor: 'R$80',
-    duracao: '2 horas'
-  },
-  2: {
-    nome: 'City Tour Oiapoque',
-    valor: 'R$60',
-    duracao: '1h30'
-  },
-  3: {
-    nome: 'Tour Cultural',
-    valor: 'R$100',
-    duracao: '3 horas'
-  },
-  4: {
-    nome: 'Passeio Especial Fronteira',
-    valor: 'R$120',
-    duracao: '4 horas'
-  }
-};
-
-// RESTAURANTES
-const restaurantes = {
-  1: {
-    nome: 'Restaurante Sabor Regional',
-    descricao: 'Comidas típicas e ambiente familiar.',
-    localizacao: 'https://maps.google.com/?q=Restaurante+Oiapoque'
-  },
-  2: {
-    nome: 'Churrascaria Fronteira',
-    descricao: 'Carnes, pratos regionais e bom atendimento.',
-    localizacao: 'https://maps.google.com/?q=Churrascaria+Oiapoque'
-  }
-};
-
-// HOTÉIS
-const hoteis = {
-  1: {
-    nome: 'Hotel Fronteira',
-    descricao: 'Hospedagem confortável no centro da cidade.',
-    localizacao: 'https://maps.google.com/?q=Hotel+Oiapoque'
-  },
-  2: {
-    nome: 'Pousada Norte',
-    descricao: 'Opção prática e econômica para turistas.',
-    localizacao: 'https://maps.google.com/?q=Pousada+Oiapoque'
-  }
-};
-
-// CONTROLE DE ETAPA
-let etapaUsuario = {};
-let reservaUsuario = {};
+let reiniciando = false;
 
 const client = new Client({
   authStrategy: new LocalAuth({
@@ -90,278 +9,183 @@ const client = new Client({
   }),
   puppeteer: {
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process',
+      '--disable-gpu'
+    ]
   }
 });
 
+function menu() {
+  return `🌎 *Borboleta Azul Turismo* 🦋
+
+Digite uma opção:
+
+1 - Pontos turísticos
+2 - Passeios
+3 - Restaurantes
+4 - Hotéis
+5 - Falar com atendente
+
+Ou digite:
+menu`;
+}
+
 client.on('qr', (qr) => {
-  console.log('ESCANEIE O QR CODE ABAIXO:\n');
+  console.log('\nESCANEIE O QR CODE ABAIXO:\n');
   qrcode.generate(qr, { small: false });
 });
 
-client.on('ready', () => {
-  console.log('BOT TURÍSTICO BORBOLETA AZUL ONLINE 🦋');
+client.on('loading_screen', (percent, message) => {
+  console.log(`Carregando: ${percent}% - ${message}`);
 });
 
-client.on('disconnected', (reason) => {
-  console.log('Bot desconectado:', reason);
+client.on('authenticated', () => {
+  console.log('WhatsApp autenticado com sucesso.');
+});
+
+client.on('ready', async () => {
+  console.log('BOT ONLINE 🚀');
+
+  try {
+    const state = await client.getState();
+    console.log('Estado atual:', state);
+  } catch (erro) {
+    console.log('Não foi possível obter o estado do cliente.');
+  }
 });
 
 client.on('auth_failure', (msg) => {
-  console.log('Falha na autenticação:', msg);
+  console.error('Falha na autenticação:', msg);
 });
 
-function saudacao() {
-  const hora = new Date().getHours();
-  if (hora < 12) return 'Bom dia';
-  if (hora < 18) return 'Boa tarde';
-  return 'Boa noite';
-}
+client.on('disconnected', async (reason) => {
+  console.log('Bot desconectado:', reason);
 
-function menuPrincipal() {
-  return `${saudacao()} 👋
+  if (reiniciando) return;
+  reiniciando = true;
 
-🌎 *Bem-vindo ao Guia Turístico Borboleta Azul* 🦋
+  try {
+    console.log('Tentando reinicializar em 5 segundos...');
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    await client.initialize();
+  } catch (erro) {
+    console.error('Erro ao reinicializar:', erro);
+  } finally {
+    reiniciando = false;
+  }
+});
 
-Escolha uma opção:
+async function responderMensagem(msg) {
+  if (!msg.body) return;
+  if (msg.fromMe) return;
 
-1️⃣ Pontos turísticos
-2️⃣ Passeios disponíveis
-3️⃣ Restaurantes
-4️⃣ Hotéis
-5️⃣ Falar com guia turístico
-6️⃣ Abrir aplicativo Borboleta Azul
+  const texto = msg.body.toLowerCase().trim();
+  const user = msg.from;
 
-Digite:
-*menu* - voltar ao menu principal`;
-}
+  console.log(`Mensagem recebida de ${user}: ${texto}`);
 
-function menuPontosTuristicos() {
-  return `📍 *PONTOS TURÍSTICOS*
+  if (texto === 'oi' || texto === 'olá' || texto === 'ola' || texto === 'menu') {
+    await client.sendMessage(user, menu());
+    return;
+  }
 
-1️⃣ Marco Zero do Brasil
-2️⃣ Ponte Binacional
-3️⃣ Orla de Oiapoque
-4️⃣ Mercado Central
+  if (texto === '1') {
+    await client.sendMessage(
+      user,
+      `📍 *Pontos turísticos*
+1. Marco Zero do Brasil
+2. Ponte Binacional
+3. Orla de Oiapoque
+4. Mercado Central
 
-Digite o número do local para ver detalhes e localização.
+Digite *menu* para voltar.`
+    );
+    return;
+  }
 
-Digite:
-*menu* - voltar ao menu principal`;
-}
+  if (texto === '2') {
+    await client.sendMessage(
+      user,
+      `🚤 *Passeios disponíveis*
+1. Passeio de barco
+2. City tour
+3. Tour cultural
 
-function menuPasseios() {
-  return `🚤 *PASSEIOS DISPONÍVEIS*
+Digite *menu* para voltar.`
+    );
+    return;
+  }
 
-1️⃣ Passeio de Barco
-2️⃣ City Tour Oiapoque
-3️⃣ Tour Cultural
-4️⃣ Passeio Especial Fronteira
+  if (texto === '3') {
+    await client.sendMessage(
+      user,
+      `🍽️ *Restaurantes*
+1. Restaurante Sabor Regional
+2. Churrascaria Fronteira
 
-Digite o número do passeio para ver detalhes.
+Digite *menu* para voltar.`
+    );
+    return;
+  }
 
-Digite:
-*menu* - voltar ao menu principal`;
-}
+  if (texto === '4') {
+    await client.sendMessage(
+      user,
+      `🏨 *Hotéis*
+1. Hotel Fronteira
+2. Pousada Norte
 
-function menuRestaurantes() {
-  return `🍽️ *RESTAURANTES*
+Digite *menu* para voltar.`
+    );
+    return;
+  }
 
-1️⃣ Restaurante Sabor Regional
-2️⃣ Churrascaria Fronteira
+  if (texto === '5') {
+    await client.sendMessage(
+      user,
+      `👨‍💼 Nosso atendimento humano falará com você em breve.`
+    );
+    return;
+  }
 
-Digite o número para ver detalhes e localização.
-
-Digite:
-*menu* - voltar ao menu principal`;
-}
-
-function menuHoteis() {
-  return `🏨 *HOTÉIS*
-
-1️⃣ Hotel Fronteira
-2️⃣ Pousada Norte
-
-Digite o número para ver detalhes e localização.
-
-Digite:
-*menu* - voltar ao menu principal`;
+  await client.sendMessage(
+    user,
+    `Não entendi sua mensagem.\n\nDigite *menu* para ver as opções.`
+  );
 }
 
 client.on('message', async (msg) => {
   try {
-    if (!msg.body) return;
-
-    const texto = msg.body.toLowerCase().trim();
-    const user = msg.from;
-
-    if (!etapaUsuario[user]) {
-      etapaUsuario[user] = 'menu';
-    }
-
-    if (texto === 'oi' || texto === 'olá' || texto === 'ola' || texto === 'menu') {
-      etapaUsuario[user] = 'menu';
-      await client.sendMessage(user, menuPrincipal());
-      return;
-    }
-
-    if (etapaUsuario[user] === 'menu') {
-      if (texto === '1') {
-        etapaUsuario[user] = 'pontos';
-        await client.sendMessage(user, menuPontosTuristicos());
-        return;
-      }
-
-      if (texto === '2') {
-        etapaUsuario[user] = 'passeios';
-        await client.sendMessage(user, menuPasseios());
-        return;
-      }
-
-      if (texto === '3') {
-        etapaUsuario[user] = 'restaurantes';
-        await client.sendMessage(user, menuRestaurantes());
-        return;
-      }
-
-      if (texto === '4') {
-        etapaUsuario[user] = 'hoteis';
-        await client.sendMessage(user, menuHoteis());
-        return;
-      }
-
-      if (texto === '5') {
-        await client.sendMessage(
-          user,
-          '👨‍💼 Nossa equipe de atendimento irá responder em breve.'
-        );
-        return;
-      }
-
-      if (texto === '6') {
-        await client.sendMessage(
-          user,
-          `📲 *Aplicativo Borboleta Azul*\n\nAcesse pelo link:\n${LINK_APP}`
-        );
-        return;
-      }
-
-      await client.sendMessage(user, 'Opção inválida.\n\n' + menuPrincipal());
-      return;
-    }
-
-    if (etapaUsuario[user] === 'pontos') {
-      const numero = Number(texto);
-
-      if (pontosTuristicos[numero]) {
-        const ponto = pontosTuristicos[numero];
-
-        await client.sendMessage(
-          user,
-          `📍 *${ponto.nome}*\n\n${ponto.descricao}\n\nLocalização:\n${ponto.localizacao}`
-        );
-        return;
-      }
-
-      await client.sendMessage(user, 'Opção inválida.\n\n' + menuPontosTuristicos());
-      return;
-    }
-
-    if (etapaUsuario[user] === 'passeios') {
-      const numero = Number(texto);
-
-      if (passeios[numero]) {
-        const passeio = passeios[numero];
-        reservaUsuario[user] = passeio.nome;
-        etapaUsuario[user] = 'reserva';
-
-        await client.sendMessage(
-          user,
-          `🚤 *${passeio.nome}*\n\n💰 Valor: ${passeio.valor}\n⏱ Duração: ${passeio.duracao}\n\nDigite *reservar* para continuar.\nOu digite *menu* para voltar ao início.`
-        );
-        return;
-      }
-
-      await client.sendMessage(user, 'Opção inválida.\n\n' + menuPasseios());
-      return;
-    }
-
-    if (etapaUsuario[user] === 'reserva') {
-      if (texto === 'reservar') {
-        etapaUsuario[user] = 'data_reserva';
-
-        await client.sendMessage(
-          user,
-          `📅 *RESERVA DE PASSEIO*\n\nPasseio escolhido: ${reservaUsuario[user]}\n\nEscolha a data:\n1️⃣ Amanhã\n2️⃣ Sábado\n3️⃣ Domingo`
-        );
-        return;
-      }
-
-      await client.sendMessage(user, 'Digite *reservar* para continuar a reserva.');
-      return;
-    }
-
-    if (etapaUsuario[user] === 'data_reserva') {
-      let dataEscolhida = '';
-
-      if (texto === '1') dataEscolhida = 'Amanhã';
-      if (texto === '2') dataEscolhida = 'Sábado';
-      if (texto === '3') dataEscolhida = 'Domingo';
-
-      if (dataEscolhida !== '') {
-        await client.sendMessage(
-          user,
-          `✅ *Reserva registrada com sucesso!*\n\nPasseio: ${reservaUsuario[user]}\nData: ${dataEscolhida}\n\nNossa equipe entrará em contato para confirmar os detalhes.\n\nObrigado por escolher a *Borboleta Azul Turismo* 🦋`
-        );
-
-        etapaUsuario[user] = 'menu';
-        reservaUsuario[user] = null;
-        return;
-      }
-
-      await client.sendMessage(
-        user,
-        'Opção inválida.\n\nEscolha:\n1️⃣ Amanhã\n2️⃣ Sábado\n3️⃣ Domingo'
-      );
-      return;
-    }
-
-    if (etapaUsuario[user] === 'restaurantes') {
-      const numero = Number(texto);
-
-      if (restaurantes[numero]) {
-        const restaurante = restaurantes[numero];
-
-        await client.sendMessage(
-          user,
-          `🍽️ *${restaurante.nome}*\n\n${restaurante.descricao}\n\nLocalização:\n${restaurante.localizacao}`
-        );
-        return;
-      }
-
-      await client.sendMessage(user, 'Opção inválida.\n\n' + menuRestaurantes());
-      return;
-    }
-
-    if (etapaUsuario[user] === 'hoteis') {
-      const numero = Number(texto);
-
-      if (hoteis[numero]) {
-        const hotel = hoteis[numero];
-
-        await client.sendMessage(
-          user,
-          `🏨 *${hotel.nome}*\n\n${hotel.descricao}\n\nLocalização:\n${hotel.localizacao}`
-        );
-        return;
-      }
-
-      await client.sendMessage(user, 'Opção inválida.\n\n' + menuHoteis());
-      return;
-    }
+    await responderMensagem(msg);
   } catch (erro) {
-    console.error('Erro ao processar mensagem:', erro);
+    console.error('Erro no evento message:', erro);
   }
 });
 
-client.initialize();
+client.on('message_create', async (msg) => {
+  try {
+    if (msg.fromMe) return;
+    await responderMensagem(msg);
+  } catch (erro) {
+    console.error('Erro no evento message_create:', erro);
+  }
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Erro não tratado (Promise):', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Exceção não capturada:', error);
+});
+
+client.initialize().catch((erro) => {
+  console.error('Erro ao iniciar o client:', erro);
+});
