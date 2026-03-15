@@ -168,84 +168,270 @@ const passeios = {
   }
 };
 
+const hoteis = {
+  1: {
+    nome: {
+      pt: 'Hotel Fronteira',
+      fr: 'Hôtel Frontière',
+      en: 'Frontier Hotel',
+      es: 'Hotel Frontera'
+    },
+    descricao: {
+      pt: 'Hospedagem confortável no centro da cidade.',
+      fr: 'Hébergement confortable au centre-ville.',
+      en: 'Comfortable accommodation in the city center.',
+      es: 'Hospedaje cómodo en el centro de la ciudad.'
+    },
+    valor: 'A partir de R$ 180 a diária',
+    localizacao: 'https://maps.google.com/?q=hotel+oiapoque'
+  },
+  2: {
+    nome: {
+      pt: 'Pousada Norte',
+      fr: 'Auberge Nord',
+      en: 'North Inn',
+      es: 'Posada Norte'
+    },
+    descricao: {
+      pt: 'Opção prática e econômica para turistas.',
+      fr: 'Option pratique et économique pour les touristes.',
+      en: 'Practical and budget-friendly option for tourists.',
+      es: 'Opción práctica y económica para turistas.'
+    },
+    valor: 'A partir de R$ 120 a diária',
+    localizacao: 'https://maps.google.com/?q=pousada+oiapoque'
+  },
+  3: {
+    nome: {
+      pt: 'Hotel Amazônia',
+      fr: 'Hôtel Amazonie',
+      en: 'Amazonia Hotel',
+      es: 'Hotel Amazonía'
+    },
+    descricao: {
+      pt: 'Hospedagem com ambiente familiar e boa localização.',
+      fr: 'Hébergement avec ambiance familiale et bon emplacement.',
+      en: 'Family-friendly hotel with good location.',
+      es: 'Hospedaje con ambiente familiar y buena ubicación.'
+    },
+    valor: 'A partir de R$ 220 a diária',
+    localizacao: 'https://maps.google.com/?q=hotel+amazonia+oiapoque'
+  }
+};
+
+const restaurantes = {
+  1: {
+    nome: {
+      pt: 'Restaurante Sabor Regional',
+      fr: 'Restaurant Saveur Régionale',
+      en: 'Regional Flavor Restaurant',
+      es: 'Restaurante Sabor Regional'
+    },
+    descricao: {
+      pt: 'Comida regional, peixes e pratos típicos.',
+      fr: 'Cuisine régionale, poissons et plats typiques.',
+      en: 'Regional food, fish and traditional dishes.',
+      es: 'Comida regional, pescados y platos típicos.'
+    },
+    faixa: 'R$ 25 a R$ 60',
+    localizacao: 'https://maps.google.com/?q=restaurante+oiapoque'
+  },
+  2: {
+    nome: {
+      pt: 'Churrascaria Fronteira',
+      fr: 'Grill Frontière',
+      en: 'Frontier Steakhouse',
+      es: 'Churrasquería Frontera'
+    },
+    descricao: {
+      pt: 'Carnes, pratos variados e ambiente familiar.',
+      fr: 'Viandes, plats variés et ambiance familiale.',
+      en: 'Meat, varied dishes and family-friendly atmosphere.',
+      es: 'Carnes, platos variados y ambiente familiar.'
+    },
+    faixa: 'R$ 35 a R$ 80',
+    localizacao: 'https://maps.google.com/?q=churrascaria+oiapoque'
+  },
+  3: {
+    nome: {
+      pt: 'Café Oiapoque',
+      fr: 'Café Oyapock',
+      en: 'Oiapoque Café',
+      es: 'Café Oiapoque'
+    },
+    descricao: {
+      pt: 'Lanches, café e refeições rápidas.',
+      fr: 'Snacks, café et repas rapides.',
+      en: 'Snacks, coffee and quick meals.',
+      es: 'Meriendas, café y comidas rápidas.'
+    },
+    faixa: 'R$ 15 a R$ 40',
+    localizacao: 'https://maps.google.com/?q=cafe+oiapoque'
+  }
+};
+
 // =============================
-// TEXTOS POR IDIOMA
+// TEXTOS
 // =============================
 const textos = {
   pt: {
     escolherIdioma: `🌎 *Borboleta Azul Turismo*\n\nEscolha seu idioma:\n\n1️⃣ Português\n2️⃣ Français\n3️⃣ English\n4️⃣ Español`,
-    menu: `🌎 *Borboleta Azul Turismo* 🦋\n\nComo posso ajudar?\n\n1️⃣ Passeios disponíveis\n2️⃣ Pontos turísticos\n3️⃣ Enviar localização\n4️⃣ Reservar passeio\n5️⃣ Pagamento PIX\n6️⃣ Abrir aplicativo\n7️⃣ Falar com atendente\n\nDigite *menu* para voltar ao início.`,
+    menu: `🌎 *Borboleta Azul Turismo* 🦋
+
+Como posso ajudar?
+
+1️⃣ Passeios disponíveis
+2️⃣ Pontos turísticos
+3️⃣ Enviar localização
+4️⃣ Reservar passeio
+5️⃣ Pagamento PIX
+6️⃣ Abrir aplicativo
+7️⃣ Falar com atendente
+8️⃣ Hotéis
+9️⃣ Restaurantes
+🔟 Reservar hotel
+
+Digite *menu* para voltar ao início.`,
     passeiosTitulo: '🚤 *Passeios disponíveis em Oiapoque*',
     pontosTitulo: '📍 *Pontos turísticos em Oiapoque*',
+    hoteisTitulo: '🏨 *Hotéis em Oiapoque*',
+    restaurantesTitulo: '🍽️ *Restaurantes em Oiapoque*',
     localizacao: `📍 *Localização base de atendimento*\n\nOiapoque - Amapá\n\nMapa:\nhttps://maps.google.com/?q=Oiapoque+Amapa`,
     falarAtendente: '👨‍💼 Nossa equipe irá falar com você em breve.',
     app: `📲 *Aplicativo Borboleta Azul*\n\nAcesse:\n${LINK_APP}`,
     pix: (valor) => `💳 *Pagamento PIX*\n\nValor: ${valor}\n\nChave PIX:\n${PIX_KEY}\n\nApós pagar, envie o comprovante.`,
-    reservaPergunta: '📅 Para reservar, envie nesta ordem:\n\nNome completo:\nData desejada:\nQuantidade de pessoas:\nPasseio desejado:',
+    reservaPergunta: '📅 Para reservar passeio, envie nesta ordem:\n\nNome completo:\nData desejada:\nQuantidade de pessoas:\nPasseio desejado:',
+    reservaHotelPergunta: '🏨 Para reservar hotel, envie nesta ordem:\n\nNome completo:\nHotel desejado:\nData de entrada:\nData de saída:\nQuantidade de hóspedes:',
     reservaRecebida: '✅ Sua pré-reserva foi registrada. Nossa equipe vai confirmar os detalhes em breve.',
+    reservaHotelRecebida: '✅ Sua solicitação de reserva de hotel foi registrada. Em breve nossa equipe confirmará os detalhes.',
     opcaoInvalida: 'Opção inválida. Digite *menu* para voltar.',
     natural: {
-      fazer: 'Você pode fazer passeio de barco no Rio Oiapoque, visitar o Marco Zero Brasil–França, conhecer experiências culturais indígenas e explorar trilhas ecológicas. Quer que eu te mostre os passeios disponíveis?',
-      preco: 'Temos passeios a partir de R$ 50 por pessoa. Posso te mostrar as opções com valores e duração.',
-      familia: 'Para família, normalmente o passeio de barco e a visita ao Marco Zero são ótimas opções. Quer ver os detalhes?',
-      default: 'Posso te ajudar com passeios, pontos turísticos, localização, reservas e pagamento PIX. Digite *menu* para ver as opções.'
+      fazer: 'Você pode fazer passeio de barco no Rio Oiapoque, visitar o Marco Zero Brasil–França, conhecer experiências culturais indígenas, explorar trilhas ecológicas, encontrar hotéis e também restaurantes locais. Quer que eu te mostre as opções?',
+      preco: 'Temos passeios a partir de R$ 50 por pessoa e hotéis a partir de R$ 120 a diária. Posso te mostrar mais detalhes.',
+      familia: 'Para família, o passeio de barco, a visita ao Marco Zero e hotéis com localização central costumam ser ótimas opções. Quer ver os detalhes?',
+      comida: 'Temos opções de restaurantes com comida regional, churrascaria e café. Posso te mostrar os restaurantes disponíveis.',
+      hotel: 'Posso te mostrar hotéis em Oiapoque com descrição, faixa de valor e opção de pré-reserva.',
+      default: 'Posso te ajudar com passeios, pontos turísticos, hotéis, restaurantes, localização, reservas e pagamento PIX. Digite *menu* para ver as opções.'
     }
   },
   fr: {
     escolherIdioma: `🌎 *Borboleta Azul Turismo*\n\nChoisissez votre langue :\n\n1️⃣ Português\n2️⃣ Français\n3️⃣ English\n4️⃣ Español`,
-    menu: `🌎 *Borboleta Azul Turismo* 🦋\n\nComment puis-je vous aider ?\n\n1️⃣ Excursions disponibles\n2️⃣ Sites touristiques\n3️⃣ Envoyer la localisation\n4️⃣ Réserver une excursion\n5️⃣ Paiement PIX\n6️⃣ Ouvrir l'application\n7️⃣ Parler à un agent\n\nTapez *menu* pour revenir au début.`,
+    menu: `🌎 *Borboleta Azul Turismo* 🦋
+
+Comment puis-je vous aider ?
+
+1️⃣ Excursions disponibles
+2️⃣ Sites touristiques
+3️⃣ Envoyer la localisation
+4️⃣ Réserver une excursion
+5️⃣ Paiement PIX
+6️⃣ Ouvrir l'application
+7️⃣ Parler à un agent
+8️⃣ Hôtels
+9️⃣ Restaurants
+🔟 Réserver un hôtel
+
+Tapez *menu* pour revenir au début.`,
     passeiosTitulo: '🚤 *Excursions disponibles à Oiapoque*',
     pontosTitulo: '📍 *Sites touristiques à Oiapoque*',
+    hoteisTitulo: '🏨 *Hôtels à Oiapoque*',
+    restaurantesTitulo: '🍽️ *Restaurants à Oiapoque*',
     localizacao: `📍 *Localisation principale*\n\nOiapoque - Amapá\n\nCarte:\nhttps://maps.google.com/?q=Oiapoque+Amapa`,
     falarAtendente: '👨‍💼 Notre équipe vous répondra bientôt.',
     app: `📲 *Application Borboleta Azul*\n\nAccédez ici:\n${LINK_APP}`,
     pix: (valor) => `💳 *Paiement PIX*\n\nMontant: ${valor}\n\nClé PIX:\n${PIX_KEY}\n\nAprès le paiement, envoyez le reçu.`,
-    reservaPergunta: '📅 Pour réserver, envoyez dans cet ordre:\n\nNom complet:\nDate souhaitée:\nNombre de personnes:\nExcursion souhaitée:',
+    reservaPergunta: '📅 Pour réserver une excursion, envoyez dans cet ordre:\n\nNom complet:\nDate souhaitée:\nNombre de personnes:\nExcursion souhaitée:',
+    reservaHotelPergunta: '🏨 Pour réserver un hôtel, envoyez dans cet ordre:\n\nNom complet:\nHôtel souhaité:\nDate d’arrivée:\nDate de départ:\nNombre d’hôtes:',
     reservaRecebida: '✅ Votre pré-réservation a été enregistrée. Notre équipe confirmera les détails bientôt.',
+    reservaHotelRecebida: '✅ Votre demande de réservation d’hôtel a été enregistrée. Notre équipe confirmera bientôt les détails.',
     opcaoInvalida: 'Option invalide. Tapez *menu* pour revenir.',
     natural: {
-      fazer: 'Vous pouvez faire une excursion en bateau sur le fleuve Oyapock, visiter le point Brésil–France, découvrir des expériences culturelles autochtones et explorer des sentiers écologiques. Voulez-vous voir les excursions disponibles ?',
-      preco: 'Nous avons des excursions à partir de R$ 50 par personne. Je peux vous montrer les options avec les prix et la durée.',
-      familia: 'Pour une famille, l’excursion en bateau et la visite du point Brésil–France sont de très bonnes options. Voulez-vous voir les détails ?',
-      default: 'Je peux vous aider avec les excursions, les sites touristiques, la localisation, les réservations et le paiement PIX. Tapez *menu* pour voir les options.'
+      fazer: 'Vous pouvez faire une excursion en bateau sur le fleuve Oyapock, visiter le point Brésil–France, découvrir des expériences culturelles autochtones, explorer des sentiers écologiques, trouver des hôtels et aussi des restaurants locaux. Voulez-vous voir les options ?',
+      preco: 'Nous avons des excursions à partir de R$ 50 par personne et des hôtels à partir de R$ 120 la nuit. Je peux vous montrer plus de détails.',
+      familia: 'Pour une famille, l’excursion en bateau, la visite du point Brésil–France et les hôtels bien situés sont de très bonnes options. Voulez-vous voir les détails ?',
+      comida: 'Nous avons des restaurants avec cuisine régionale, grillades et café. Je peux vous montrer les restaurants disponibles.',
+      hotel: 'Je peux vous montrer les hôtels à Oiapoque avec description, tarif et option de pré-réservation.',
+      default: 'Je peux vous aider avec les excursions, sites touristiques, hôtels, restaurants, localisation, réservations et paiement PIX. Tapez *menu* pour voir les options.'
     }
   },
   en: {
     escolherIdioma: `🌎 *Borboleta Azul Turismo*\n\nChoose your language:\n\n1️⃣ Português\n2️⃣ Français\n3️⃣ English\n4️⃣ Español`,
-    menu: `🌎 *Borboleta Azul Turismo* 🦋\n\nHow can I help you?\n\n1️⃣ Available tours\n2️⃣ Tourist attractions\n3️⃣ Send location\n4️⃣ Book a tour\n5️⃣ PIX payment\n6️⃣ Open app\n7️⃣ Talk to an agent\n\nType *menu* to go back.`,
+    menu: `🌎 *Borboleta Azul Turismo* 🦋
+
+How can I help you?
+
+1️⃣ Available tours
+2️⃣ Tourist attractions
+3️⃣ Send location
+4️⃣ Book a tour
+5️⃣ PIX payment
+6️⃣ Open app
+7️⃣ Talk to an agent
+8️⃣ Hotels
+9️⃣ Restaurants
+🔟 Book a hotel
+
+Type *menu* to go back.`,
     passeiosTitulo: '🚤 *Available tours in Oiapoque*',
     pontosTitulo: '📍 *Tourist attractions in Oiapoque*',
+    hoteisTitulo: '🏨 *Hotels in Oiapoque*',
+    restaurantesTitulo: '🍽️ *Restaurants in Oiapoque*',
     localizacao: `📍 *Main service location*\n\nOiapoque - Amapá\n\nMap:\nhttps://maps.google.com/?q=Oiapoque+Amapa`,
     falarAtendente: '👨‍💼 Our team will contact you soon.',
     app: `📲 *Borboleta Azul App*\n\nAccess here:\n${LINK_APP}`,
     pix: (valor) => `💳 *PIX Payment*\n\nAmount: ${valor}\n\nPIX key:\n${PIX_KEY}\n\nAfter payment, send the receipt.`,
-    reservaPergunta: '📅 To book, send in this order:\n\nFull name:\nDesired date:\nNumber of people:\nDesired tour:',
+    reservaPergunta: '📅 To book a tour, send in this order:\n\nFull name:\nDesired date:\nNumber of people:\nDesired tour:',
+    reservaHotelPergunta: '🏨 To book a hotel, send in this order:\n\nFull name:\nDesired hotel:\nCheck-in date:\nCheck-out date:\nNumber of guests:',
     reservaRecebida: '✅ Your pre-booking has been registered. Our team will confirm the details soon.',
+    reservaHotelRecebida: '✅ Your hotel booking request has been registered. Our team will confirm the details soon.',
     opcaoInvalida: 'Invalid option. Type *menu* to go back.',
     natural: {
-      fazer: 'You can take a boat tour on the Oiapoque River, visit the Brazil–France landmark, enjoy indigenous cultural experiences and explore ecological trails. Would you like to see the available tours?',
-      preco: 'We have tours starting from R$ 50 per person. I can show you the options with prices and duration.',
-      familia: 'For families, the boat tour and the Brazil–France landmark visit are usually great choices. Would you like to see the details?',
-      default: 'I can help you with tours, tourist attractions, location, bookings and PIX payment. Type *menu* to see the options.'
+      fazer: 'You can take a boat tour on the Oiapoque River, visit the Brazil–France landmark, enjoy indigenous cultural experiences, explore ecological trails, find hotels and also local restaurants. Would you like to see the options?',
+      preco: 'We have tours starting from R$ 50 per person and hotels starting from R$ 120 per night. I can show you more details.',
+      familia: 'For families, the boat tour, the Brazil–France landmark visit and centrally located hotels are usually great choices. Would you like to see the details?',
+      comida: 'We have restaurants with regional food, steakhouse options and café. I can show you the available restaurants.',
+      hotel: 'I can show you hotels in Oiapoque with description, price range and pre-booking option.',
+      default: 'I can help you with tours, tourist attractions, hotels, restaurants, location, bookings and PIX payment. Type *menu* to see the options.'
     }
   },
   es: {
     escolherIdioma: `🌎 *Borboleta Azul Turismo*\n\nElige tu idioma:\n\n1️⃣ Português\n2️⃣ Français\n3️⃣ English\n4️⃣ Español`,
-    menu: `🌎 *Borboleta Azul Turismo* 🦋\n\n¿Cómo puedo ayudarte?\n\n1️⃣ Paseos disponibles\n2️⃣ Puntos turísticos\n3️⃣ Enviar ubicación\n4️⃣ Reservar paseo\n5️⃣ Pago PIX\n6️⃣ Abrir aplicación\n7️⃣ Hablar con un agente\n\nEscribe *menu* para volver al inicio.`,
+    menu: `🌎 *Borboleta Azul Turismo* 🦋
+
+¿Cómo puedo ayudarte?
+
+1️⃣ Paseos disponibles
+2️⃣ Puntos turísticos
+3️⃣ Enviar ubicación
+4️⃣ Reservar paseo
+5️⃣ Pago PIX
+6️⃣ Abrir aplicación
+7️⃣ Hablar con un agente
+8️⃣ Hoteles
+9️⃣ Restaurantes
+🔟 Reservar hotel
+
+Escribe *menu* para volver al inicio.`,
     passeiosTitulo: '🚤 *Paseos disponibles en Oiapoque*',
     pontosTitulo: '📍 *Puntos turísticos en Oiapoque*',
+    hoteisTitulo: '🏨 *Hoteles en Oiapoque*',
+    restaurantesTitulo: '🍽️ *Restaurantes en Oiapoque*',
     localizacao: `📍 *Ubicación principal*\n\nOiapoque - Amapá\n\nMapa:\nhttps://maps.google.com/?q=Oiapoque+Amapa`,
     falarAtendente: '👨‍💼 Nuestro equipo hablará contigo en breve.',
     app: `📲 *Aplicación Borboleta Azul*\n\nAccede aquí:\n${LINK_APP}`,
     pix: (valor) => `💳 *Pago PIX*\n\nValor: ${valor}\n\nClave PIX:\n${PIX_KEY}\n\nDespués del pago, envía el comprobante.`,
-    reservaPergunta: '📅 Para reservar, envía en este orden:\n\nNombre completo:\nFecha deseada:\nCantidad de personas:\nPaseo deseado:',
+    reservaPergunta: '📅 Para reservar paseo, envía en este orden:\n\nNombre completo:\nFecha deseada:\nCantidad de personas:\nPaseo deseado:',
+    reservaHotelPergunta: '🏨 Para reservar hotel, envía en este orden:\n\nNombre completo:\nHotel deseado:\nFecha de entrada:\nFecha de salida:\nCantidad de huéspedes:',
     reservaRecebida: '✅ Tu pre-reserva fue registrada. Nuestro equipo confirmará los detalles pronto.',
+    reservaHotelRecebida: '✅ Tu solicitud de reserva de hotel fue registrada. Nuestro equipo confirmará los detalles pronto.',
     opcaoInvalida: 'Opción inválida. Escribe *menu* para volver.',
     natural: {
-      fazer: 'Puedes hacer un paseo en bote por el Río Oiapoque, visitar el Marco Brasil–Francia, conocer experiencias culturales indígenas y explorar senderos ecológicos. ¿Quieres ver los paseos disponibles?',
-      preco: 'Tenemos paseos desde R$ 50 por persona. Puedo mostrarte las opciones con precios y duración.',
-      familia: 'Para familias, el paseo en bote y la visita al Marco Brasil–Francia suelen ser muy buenas opciones. ¿Quieres ver los detalles?',
-      default: 'Puedo ayudarte con paseos, puntos turísticos, ubicación, reservas y pago PIX. Escribe *menu* para ver las opciones.'
+      fazer: 'Puedes hacer un paseo en bote por el Río Oiapoque, visitar el Marco Brasil–Francia, conocer experiencias culturales indígenas, explorar senderos ecológicos, encontrar hoteles y también restaurantes locales. ¿Quieres ver las opciones?',
+      preco: 'Tenemos paseos desde R$ 50 por persona y hoteles desde R$ 120 por noche. Puedo mostrarte más detalles.',
+      familia: 'Para familias, el paseo en bote, la visita al Marco Brasil–Francia y los hoteles bien ubicados suelen ser muy buenas opciones. ¿Quieres ver los detalles?',
+      comida: 'Tenemos restaurantes con comida regional, churrasquería y café. Puedo mostrarte los restaurantes disponibles.',
+      hotel: 'Puedo mostrarte hoteles en Oiapoque con descripción, precio y opción de pre-reserva.',
+      default: 'Puedo ayudarte con paseos, puntos turísticos, hoteles, restaurantes, ubicación, reservas y pago PIX. Escribe *menu* para ver las opciones.'
     }
   }
 };
@@ -315,32 +501,50 @@ async function responderComDigitacao(msg, resposta, tempo = 1800) {
 }
 
 function detectarIntencaoNatural(texto) {
-  const t = texto.toLowerCase();
+  const txt = texto.toLowerCase();
 
   if (
-    t.includes('o que tem para fazer') ||
-    t.includes('o que fazer') ||
-    t.includes('que fazer') ||
-    t.includes('what to do') ||
-    t.includes('que faire') ||
-    t.includes('que hacer')
+    txt.includes('o que tem para fazer') ||
+    txt.includes('o que fazer') ||
+    txt.includes('que fazer') ||
+    txt.includes('what to do') ||
+    txt.includes('que faire') ||
+    txt.includes('que hacer')
   ) return 'fazer';
 
   if (
-    t.includes('preço') ||
-    t.includes('valor') ||
-    t.includes('quanto custa') ||
-    t.includes('price') ||
-    t.includes('prix') ||
-    t.includes('precio')
+    txt.includes('preço') ||
+    txt.includes('valor') ||
+    txt.includes('quanto custa') ||
+    txt.includes('price') ||
+    txt.includes('prix') ||
+    txt.includes('precio')
   ) return 'preco';
 
   if (
-    t.includes('família') ||
-    t.includes('familia') ||
-    t.includes('family') ||
-    t.includes('famille')
+    txt.includes('família') ||
+    txt.includes('familia') ||
+    txt.includes('family') ||
+    txt.includes('famille')
   ) return 'familia';
+
+  if (
+    txt.includes('restaurante') ||
+    txt.includes('comida') ||
+    txt.includes('onde comer') ||
+    txt.includes('food') ||
+    txt.includes('restaurant') ||
+    txt.includes('restaurante')
+  ) return 'comida';
+
+  if (
+    txt.includes('hotel') ||
+    txt.includes('hospedagem') ||
+    txt.includes('onde ficar') ||
+    txt.includes('accommodation') ||
+    txt.includes('hébergement') ||
+    txt.includes('alojamiento')
+  ) return 'hotel';
 
   return 'default';
 }
@@ -368,6 +572,30 @@ function listaPontos(user) {
 4️⃣ ${pontosTuristicos[4].nome[lang]}
 
 Digite o número do ponto turístico para ver detalhes.
+Digite *menu* para voltar.`;
+}
+
+function listaHoteis(user) {
+  const lang = getIdioma(user);
+  return `${t(user).hoteisTitulo}
+
+1️⃣ ${hoteis[1].nome[lang]}
+2️⃣ ${hoteis[2].nome[lang]}
+3️⃣ ${hoteis[3].nome[lang]}
+
+Digite o número do hotel para ver detalhes.
+Digite *menu* para voltar.`;
+}
+
+function listaRestaurantes(user) {
+  const lang = getIdioma(user);
+  return `${t(user).restaurantesTitulo}
+
+1️⃣ ${restaurantes[1].nome[lang]}
+2️⃣ ${restaurantes[2].nome[lang]}
+3️⃣ ${restaurantes[3].nome[lang]}
+
+Digite o número do restaurante para ver detalhes.
 Digite *menu* para voltar.`;
 }
 
@@ -408,8 +636,46 @@ ${lang === 'pt' ? 'Localização' : lang === 'fr' ? 'Localisation' : lang === 'e
 ${ponto.localizacao}`;
 }
 
+function detalhesHotel(user, numero) {
+  const lang = getIdioma(user);
+  const hotel = hoteis[numero];
+
+  return `🏨 *${hotel.nome[lang]}*
+
+${hotel.descricao[lang]}
+
+${lang === 'pt' ? 'Valor' : lang === 'fr' ? 'Prix' : lang === 'en' ? 'Price' : 'Valor'}:
+${hotel.valor}
+
+${lang === 'pt' ? 'Localização' : lang === 'fr' ? 'Localisation' : lang === 'en' ? 'Location' : 'Ubicación'}:
+${hotel.localizacao}
+
+${lang === 'pt'
+  ? 'Para reservar hotel, digite *reservar hotel*.'
+  : lang === 'fr'
+  ? 'Pour réserver un hôtel, tapez *reservar hotel*.'
+  : lang === 'en'
+  ? 'To book a hotel, type *reservar hotel*.'
+  : 'Para reservar hotel, escribe *reservar hotel*.'}`;
+}
+
+function detalhesRestaurante(user, numero) {
+  const lang = getIdioma(user);
+  const restaurante = restaurantes[numero];
+
+  return `🍽️ *${restaurante.nome[lang]}*
+
+${restaurante.descricao[lang]}
+
+${lang === 'pt' ? 'Faixa de valor' : lang === 'fr' ? 'Fourchette de prix' : lang === 'en' ? 'Price range' : 'Rango de precio'}:
+${restaurante.faixa}
+
+${lang === 'pt' ? 'Localização' : lang === 'fr' ? 'Localisation' : lang === 'en' ? 'Location' : 'Ubicación'}:
+${restaurante.localizacao}`;
+}
+
 // =============================
-// MENSAGENS
+// PROCESSAMENTO
 // =============================
 async function processarMensagem(msg) {
   if (!msg.body) return;
@@ -452,14 +718,27 @@ async function processarMensagem(msg) {
     etapaUsuario[user] = 'menu';
   }
 
-  if (texto === 'oi' || texto === 'olá' || texto === 'ola' || texto === 'hello' || texto === 'bonjour' || texto === 'hola' || texto === 'menu') {
+  if (
+    texto === 'oi' ||
+    texto === 'olá' ||
+    texto === 'ola' ||
+    texto === 'hello' ||
+    texto === 'bonjour' ||
+    texto === 'hola' ||
+    texto === 'menu'
+  ) {
     etapaUsuario[user] = 'menu';
     await responderComDigitacao(msg, t(user).menu, 1800);
     return;
   }
 
-  // perguntas naturais
-  if (!['1', '2', '3', '4', '5', '6', '7', 'reservar'].includes(texto) && etapaUsuario[user] === 'menu') {
+  if (texto === 'reservar hotel') {
+    etapaUsuario[user] = 'reserva_hotel_livre';
+    await responderComDigitacao(msg, t(user).reservaHotelPergunta, 1800);
+    return;
+  }
+
+  if (!['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'reservar', 'reservar hotel'].includes(texto) && etapaUsuario[user] === 'menu') {
     const intencao = detectarIntencaoNatural(texto);
     await responderComDigitacao(msg, t(user).natural[intencao], 2200);
     return;
@@ -490,7 +769,7 @@ async function processarMensagem(msg) {
     }
 
     if (texto === '5') {
-      await responderComDigitacao(msg, t(user).pix('a combinar conforme passeio'), 1600);
+      await responderComDigitacao(msg, t(user).pix('a combinar conforme passeio ou serviço'), 1600);
       return;
     }
 
@@ -501,6 +780,24 @@ async function processarMensagem(msg) {
 
     if (texto === '7') {
       await responderComDigitacao(msg, t(user).falarAtendente, 1400);
+      return;
+    }
+
+    if (texto === '8') {
+      etapaUsuario[user] = 'hoteis';
+      await responderComDigitacao(msg, listaHoteis(user), 1800);
+      return;
+    }
+
+    if (texto === '9') {
+      etapaUsuario[user] = 'restaurantes';
+      await responderComDigitacao(msg, listaRestaurantes(user), 1800);
+      return;
+    }
+
+    if (texto === '10') {
+      etapaUsuario[user] = 'reserva_hotel_livre';
+      await responderComDigitacao(msg, t(user).reservaHotelPergunta, 1800);
       return;
     }
 
@@ -515,12 +812,6 @@ async function processarMensagem(msg) {
       reservaUsuario[user] = numero;
       etapaUsuario[user] = 'detalhe_passeio';
       await responderComDigitacao(msg, detalhesPasseio(user, numero), 2200);
-      return;
-    }
-
-    if (texto === 'menu') {
-      etapaUsuario[user] = 'menu';
-      await responderComDigitacao(msg, t(user).menu, 1500);
       return;
     }
 
@@ -551,8 +842,38 @@ async function processarMensagem(msg) {
     return;
   }
 
+  if (etapaUsuario[user] === 'hoteis') {
+    const numero = Number(texto);
+
+    if (hoteis[numero]) {
+      await responderComDigitacao(msg, detalhesHotel(user, numero), 1800);
+      return;
+    }
+
+    await responderComDigitacao(msg, t(user).opcaoInvalida, 1200);
+    return;
+  }
+
+  if (etapaUsuario[user] === 'restaurantes') {
+    const numero = Number(texto);
+
+    if (restaurantes[numero]) {
+      await responderComDigitacao(msg, detalhesRestaurante(user, numero), 1800);
+      return;
+    }
+
+    await responderComDigitacao(msg, t(user).opcaoInvalida, 1200);
+    return;
+  }
+
   if (etapaUsuario[user] === 'reserva_livre') {
     await responderComDigitacao(msg, t(user).reservaRecebida, 1800);
+    etapaUsuario[user] = 'menu';
+    return;
+  }
+
+  if (etapaUsuario[user] === 'reserva_hotel_livre') {
+    await responderComDigitacao(msg, t(user).reservaHotelRecebida, 1800);
     etapaUsuario[user] = 'menu';
     return;
   }
