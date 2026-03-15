@@ -1,7 +1,7 @@
 {
   "name": "borboleta-azul-turismo-bot",
   "version": "1.0.0",
-  "description": "Bot turístico Borboleta Azul com idiomas, reservas e PIX",
+  "description": "Bot turístico Borboleta Azul com idiomas, reservas, hotéis e restaurantes",
   "main": "bot-turismo.js",
   "scripts": {
     "start": "node bot-turismo.js"
